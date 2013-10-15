@@ -1,0 +1,41 @@
+#!/bin/bash
+
+if [ -z "$1" ]
+	then 
+	echo Usage: 
+	echo yiitar dirname
+	echo 
+	echo Where 'dirname' is the Yii base directory of the app you want to tar up.
+	echo e.g. to zip up an app in /var/www/glenn.io:
+	echo yiitar /var/www/glenn.io
+else
+	if [ 'directory' == `file -b $1` ]
+		then
+		# echo 'Clearing assets...'
+		# rm -rf $1/assets/
+		# echo 'Clearing runtime files...'
+		# rm -rf $1/protected/runtime/
+
+		here=`pwd`
+		projbase=`basename $1`
+	
+		tarname=$here/$projbase-`date +%y%m%d`.tar.gz
+		echo "tarname=$tarname"
+		if [ -n "$2" ]; then tarname=$here/$2; fi
+		echo "tarname=$tarname"
+	
+		cd $1/..
+		# took ages to figure out the tar command - you can't use absolute and 
+		# relative paths in the same tar command!
+		# http://stackoverflow.com/questions/4290174/excluding-directory-when-creating-a-tar-gz-file
+		tar -cvzf $tarname \
+			--exclude-vcs \
+			--exclude=$projbase/assets \
+			--exclude=$projbase/protected/runtime \
+			--exclude=$projbase/protected/data \
+			--exclude=$projbase/protected/tests/report \
+			`basename $1` 
+		cd $here
+	fi
+
+fi

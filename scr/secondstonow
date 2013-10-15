@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [ -z $1 ]; then
+	echo
+	echo Usage: secondstonow datestring
+	echo
+	exit
+fi
+
+now=`date +%s`
+then=`date --date=$1 +%s`
+numseconds=$(($then-$now))
+
+echo Now:  $now `date +%F\ %T`
+echo Then: $then `date --date=$1 +%F\ %T`
+
+if [ "$numseconds" -lt 0 ]; then
+	echo $now $then $numseconds past
+else
+	echo $now $then $numseconds future
+fi
+

@@ -1,0 +1,15 @@
+#!/usr/bin/php
+<?
+if (isset($argv[1])) {
+	require_once('cssmin-v3.0.1.php');
+
+	if (file_exists($argv[1])) {
+		echo CssMin::minify(file_get_contents($argv[1])); 
+	} else {
+		echo "\n\nFile '" . $argv[1] . "' does not exist.\n\n";
+	}
+} else {
+	echo "\n\nUsage: cssmin filename.\n\n";
+}
+?>
+

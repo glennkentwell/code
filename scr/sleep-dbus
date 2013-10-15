@@ -1,0 +1,17 @@
+#!/bin/sh
+
+dest="org.freedesktop.UPower"
+destpath=/org/freedesktop/UPower
+messagename=org.freedesktop.UPower.Suspend
+messagecontent=
+
+
+gnome-screensaver-command -l
+
+dbus-send --system --print-reply --dest=$dest $destpath $messagename $messagecontent
+    
+    
+# maybe how to invoke lock screen via dbus
+# http://unix.stackexchange.com/questions/28181/run-script-on-screen-lock-unlock
+    
+# dbus-send --system --print-reply --dest="org.freedesktop.UPower" /org/freedesktop/UPower org.freedesktop.UPower.Suspend

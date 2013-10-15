@@ -1,0 +1,287 @@
+
+body { font-size: 12pt; }
+
+.breadcrumb {
+	margin: 0 15px 0 15px;
+}
+ul.breadcrumbs {
+	margin-bottom: 0;
+}
+
+#content h1 {
+	font-size: 1.5em;
+}
+#content h2 {
+	font-size: 1.3em;
+}
+
+/* required fields note at top of forms */
+p.note {
+	margin-left: 12em;
+	font-size: 1em;
+	color: #aaa;
+}
+
+label {
+	float: left;
+	margin-right: 1em;
+	text-align:right;
+	width: 12em;
+	min-width: 12em;
+	max-width: 12em;
+	/* line-height: 2.3em; this doesnt work */
+}
+input,
+select {
+	float: left;
+	margin-right: 1em !important;
+}
+input.arrow {
+	margin: 0 !important;
+}
+
+label.right {
+	text-align: left;
+	float:left;
+	margin-left: 1em;
+	width: auto;
+	min-width: auto;
+	max-width: auto;
+}
+
+.search-form {
+	display: none;
+}
+fieldset legend {
+	margin-bottom: 0.5em;
+}
+fieldset textarea {
+	width: 96%;
+}
+
+#content .span6,
+#content .span9
+{ margin-left: 20px; } 	/* not 30px from bootstrap responsive */
+
+table.mceLayout {
+	max-width: 90%;
+}
+/* data records on update page eg. candidate, CV */
+.record,
+.form {
+	float:left;
+	/* border: solid 1px #ededef; */
+	clear: both;
+	width: 100%;
+	min-width: 490px;
+	margin: 0.2em;
+	padding: 0.5em;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+/*
+.form:hover,
+.record:hover {
+	background: #efeff9;
+} */
+.ui-tabs-panel .form:hover,
+.ui-tabs-panel .record:hover {
+	background: #fff;
+}
+ul.operations {
+	text-align: right;
+
+	/*background: #e8d657 !important;*/
+	border: dotted 2px #f1e3fc;
+	padding: 0.3em 0.6em;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+
+}
+
+/* sidebar aka top menu at rhs */
+#sidebar { margin-left: -10px; border: 0; }
+
+/* edit, delete etc actions on an entity */
+.actions {
+	/* margin: 0 1em; */
+	float: right;
+	text-align: right;
+}
+.actionadd {
+	float:right;
+	clear:none;
+	margin-top: -2.5em;
+}
+.view {
+	float: left;
+	margin-left: -20px; 		/* match .row in bootstrap.css */
+	clear: none;
+}
+.view:hover {
+	/*background: #efefef; */
+}
+
+/* use bootstrap button styles for links, so they need white text */
+a.ui-widget-content,
+a.btn {
+	color: #fff !important;
+}
+
+
+/* gridview styles */
+a.view { margin-left: 0; }	/* CGridView 'view' button needs NO MARGIN! */
+.idcolumn { width: 4em; }
+
+.timestamp {
+	font-size: 8pt;
+	font-family: sans-serif;
+	color: #888;
+	line-height: 9pt;
+	margin-top: 9pt;
+}
+
+/* mailbox checkbox label */
+form#message-form > div.form {
+	clear:none;
+	float:none;
+}
+form#message-form > div.form:hover {
+	background: #fff;
+}
+#mailbox-compose input,
+#mailbox-list input {
+	float: none;
+}
+div.mailbox-input-row > div > label,
+#mailbox-list label,
+label.ui-helper-reset {
+	width: auto;
+	min-width: auto;
+	max-width: auto;
+}
+
+#personmatches-grid .summary {
+	display: none;
+}
+
+/* reusable classes */
+.center {
+	margin: auto;
+	width: 30em;
+	max-width: 100%;
+}
+
+.left { float: left; text-align: left; }
+.right { float: right; text-align: right;}
+
+div.note {
+	margin-bottom: 1em;
+}
+div.note > div {
+	padding: 5px 9.5px;
+	color: #777;
+}
+div.note pre {
+	font-family: Arial, sans-serif;
+	font-size:12pt;
+	margin-bottom: 0;
+}
+
+/* Rights module */
+.assign-link {
+	color: #369;
+}
+.revoke-link {
+	border-radius: 5px;
+	background: #369;
+	padding: 0.5em;
+	color:#fff !important;
+}
+
+/* job ad listings */
+.job-ad {
+	float:left;
+	clear:both;
+	width: 100%;
+	max-width: 600px;
+	min-width: 300px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.job-ad-main
+{
+	float:left;
+	padding: 0; 
+	margin: 0;
+	width: 100%;
+	border-radius: 10px;
+	border: solid 4px #449;
+	margin-bottom: 3em;
+}
+.job-ad-heading { 
+	float:left;
+	width: 100%;
+	background: #449;
+	margin-left: 0 !important;
+}
+.job-ad-heading h2 {
+	margin: 0.25em 0.75em;
+	float: left;
+	max-width: 65%;
+	color: #00f0ff;
+}
+.job-ad-heading h2 a {
+	font-size: 16px;
+	color: #00f0ff;
+}
+.job-ad-keypoints { 
+	background: #fff; 
+	margin: 0; 
+	margin-left: 0 !important; 
+	float: left;
+	clear: both;
+}
+.job-ad-keypoints-txt { margin: 1em; }
+.job-ad-apply {
+	float:right; 
+	margin: 8px 8px 0 0;
+	min-width: 60px;
+}
+.job-ad-info {
+	margin: 1em;
+}
+.job-ad-more {
+	float: left;
+	width: 100%;
+	text-align: right;
+	background: #449;
+	border-radius: 0 0 5px 5px;
+}
+.job-ad-more a {
+	color: #00f0ff;
+	margin: 1em;
+	line-height: 2em;
+	font-weight: bold;
+}
+.job-ad-more a:hover {
+	color: #fff;
+}
+
+/* job ad search */
+.job-ad-search {
+	width: 80%;
+	max-width: 600px;
+	min-width: 300px;
+}
+.job-ad-search input#q {
+	width: 95%;
+	font-size: 1.5em;
+	padding: 0.25em;
+}
+.job-ad-search input#search {
+	min-width: 5em;
+}
+

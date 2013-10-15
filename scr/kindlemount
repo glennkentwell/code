@@ -1,0 +1,3 @@
+#!/bin/bash
+sudo mtp-detect
+sudo mtpfs -o allow_other ~/Desktop/kindlefire

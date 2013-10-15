@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo Killing any existing synergy servers...
+killall synergys
+
+# sh 
+#if [ -z "omg" ] -a [ 'd' == "$1" ]; then
+#if [  "$1" ]; then if  [ $1 == 'd' ]
+if [ "$1" ]
+	then 
+		synergys --debug DEBUG -f -c ~/.synergy.conf 
+	else
+		synergys -c ~/.synergy.conf
+	fi
+# else	
+# 	echo Usage:
+# 	echo synergyserver [d]
+# 	echo
+# 	echo d to get synergys to output DEBUG level messages and not daemonize
+# 	echo
+# fi

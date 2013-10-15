@@ -1,0 +1,14 @@
+#!/bin/sh
+
+DOMAIN=$1
+
+[ "$DOMAIN" = "" ] && echo $0 websiteurl && exit
+
+openssl genrsa -out $DOMAIN.key 2048
+openssl req -new -key $DOMAIN.key -out $DOMAIN.csr
+
+# Self-sign the certificate
+
+openssl x509 -req -days 365 -in $DOMAIN.csr -signkey $DOMAIN.key -out $DOMAIN.crt
+
+cat $DOMAIN.csr
