@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# find all files under the current dir: 			-type f
+# show their modified time as seconds since 1970: 	%T@
+# show their modified time human readable: 			%t
+# show their filename:								%p
+# new line!
+# sort numerically, so the files are listed in order of modification time
+
+find . -type f -printf "%T@ %t %p\n"|sort -n
