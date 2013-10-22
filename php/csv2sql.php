@@ -1,3 +1,5 @@
+#!/usr/bin/php
+
 <?php
 if (!defined('STDIN')) die("only for command line yo\n");
 if ($argc===1) die("give us a file to convert bro");
