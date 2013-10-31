@@ -1,0 +1,65 @@
+uses Crt,Dos, Cursor;
+const
+  Max = 4500;
+type
+  Str = string[80];
+
+var
+  Num,
+  X, Y: integer;
+  F: file;
+  S, Buffer: Str;
+  Filename: string;
+  Ch, Chr: char;
+
+procedure ReadALine;
+begin
+  Buffer:= '';
+  Y:= 0;
+  While Y <= 80 do
+  begin
+    Inc(Y);
+    BlockRead(F, Ch, 1);
+    If Ord(Ch) > 13 then
+        Buffer:= Buffer + Ch
+        else Dec(Y);
+  end;
+  S:= Buffer;
+end;
+
+procedure WriteALine;
+begin
+  Write(S);
+end;
+
+begin
+  TextColor(Yellow);
+  TextBackGround(Black);
+  ClrScr;
+  if ParamCount = 0 then
+  begin
+    Write('What file? ');
+    Readln(Filename);
+  end
+  else Filename:= ParamStr(1);
+  GoToXY(40 - Length(Filename) div 2, 1); Write(Filename);
+  ClrScr;
+  TextBackGround(Blue);
+  NoCursor;
+  X:= 0;  Y:= 0;
+  Assign(F, Filename);
+  Reset(F, 1);
+  Num:= 0;
+  While (not Eof(F)) and (Chr <> #27) do
+  begin
+    Inc(Num);
+    ReadALine;
+    WriteALine;
+    If Num = 24 then
+    begin
+      Chr:= ReadKey;
+      Num:= 0;
+    end;
+  end;
+  Close(F);
+end.

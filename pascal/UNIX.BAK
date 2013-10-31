@@ -1,0 +1,147 @@
+program Entry;
+uses
+  Crt, Dos, Graph,
+  BGIFont, BGIDriv,
+  GrafBits;
+
+const
+  days : array [0..6] of String[9] =
+    ('Sunday','Monday','Tuesday',
+     'Wednesday','Thursday','Friday',
+     'Saturday');
+
+type
+  WhichLetters = (All, One);
+  User = record
+    Login,
+    Password: string[10];
+  end;
+
+var
+  LogFile : text;
+  Users: file of User;
+  Login, Password: string[10];
+  CurrentUser: User;
+  UserList: array[1..20] of User;
+  FileInfo: SearchRec;
+  Year, Month, Day, DOW,
+  Hour, Min, Sec, Hund : Word;
+  NumUsers: integer;
+
+function LeadingZero(W : Word) : String;
+var
+  s : String;
+begin
+  Str(W:0,S);
+  if Length(S) = 1 then
+    S := '0' + s;
+  LeadingZero := s;
+end;
+
+function MakeCapitals(S: string; AllOrOne: WhichLetters): string;
+var
+  X: integer;
+begin
+  if AllOrOne = One then S[1]:= UpCase(S[1]);
+  if AllOrOne = All then
+    For X:= 1 to Length(S) do
+      S[X]:= UpCase(S[X]);
+  MakeCapitals:= S;
+end;
+
+procedure GetUserList;
+var
+  X: integer;
+begin
+  Assign(Users, 'C:\USERS.TXT');
+  Reset(Users);
+  X:= 1;
+  While not Eof(Users) do
+  begin
+    Read(Users, UserList[X]);
+    Inc(X);
+  end;
+  Close(Users);
+  NumUsers:= X - 1;
+end;
+
+function ReadPass: string;
+var
+  Ch: char;
+  S: string;
+begin
+  S:= '';
+  Ch:= ReadKey;
+  While Ch <> #13 do
+  begin
+    Insert(Ch, S, Length(S) + 1);
+    Write('*');
+    Ch:= ReadKey;
+  end;
+  ReadPass:= S;
+end;
+
+procedure FindUserName;
+var
+  Name: string;
+begin
+  TextBackGround(Black);
+  ClrScr;
+  TextColor(LightGray);
+  Write('login : ');
+  Readln(Login);
+  Writeln;
+  Write('password : ');
+  Password:= ReadPass;
+  CurrentUser.Login:= Login;
+  CurrentUser.Password:= Password;
+end;
+
+procedure FindPointInTime;
+begin
+  GetDate(Year, Month, Day, DOW);
+  GetTime(Hour, Min, Sec, HUND);
+end;
+
+procedure FileStuff;
+begin
+  Assign(LogFile, 'C:\LOG.TXT');
+  ChDir('C:\');
+  FindFirst('LOG.TXT', Archive, FileInfo);
+  if DosError <> 0 then
+    ReWrite(LogFile)
+    else Append(LogFile);
+  Write(LogFile, Password, ', ', Login, '  ');
+  Write(LogFile, LeadingZero(Day), '/', LeadingZero(Month), '/', LeadingZero(Year),'  ');
+  Writeln(LogFile, LeadingZero(Hour),':', LeadingZero(Min),
+                                     ':', LeadingZero(Sec),
+                                     '.', LeadingZero(Hund));
+  Close(LogFile);
+end;
+
+function VerifyUser: Boolean;
+var
+  X: integer;
+begin
+  VerifyUser:= False;
+  For X:= 1 to NumUsers do
+    If UserList[X].Login = CurrentUser.Login then
+      If UserList[X].Password = CurrentUser.Password then
+        VerifyUser:= True;
+end;
+
+procedure Reboot;
+begin
+  asm
+    INT $19
+  end;
+end;
+
+begin
+  GetUserList;
+  FindPointInTime;
+  FindUserName;
+  If not VerifyUser then
+    Reboot;
+  FileStuff;
+end.

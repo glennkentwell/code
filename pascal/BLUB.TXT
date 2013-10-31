@@ -1,0 +1,7 @@
+blah
+blah
+blah
+blah
+This file has a lot of carriage returns in it, but
+after my little program fixes it, it shouldn't have any!!
+!!.

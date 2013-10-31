@@ -1,0 +1,18 @@
+program Fibonacci;
+uses Crt;
+var
+  X, Y, Next: integer;
+
+begin
+  Writeln('Enter two seed integers : ');
+  Readln(X, Y);
+  Repeat
+    Writeln(X);
+    Writeln(Y);
+    Next:= X + Y;
+    X:= Y;
+    Y:= Next;
+    Delay(10);
+  Until KeyPressed;
+  ReadKey;
+end.

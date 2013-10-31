@@ -1,0 +1,30 @@
+program Modemnusty;
+uses Crt;
+const
+  InitString = 'ATM1L1E1Q0V1X1S7=55S11=60S0=0';
+  HangUp = 'ATH';
+var
+  X: integer;
+  S, St: string;
+  ComPortIn, ComPortOut:text;
+begin
+  Assign(ComPortIn, 'COM2');
+  Assign(ComPortOut, 'COM2');
+  Reset(ComPortIn);
+  Rewrite(ComPortOut);
+  Write('Initialising modem...');
+  Write(ComPortOut, InitString);
+  Readln(ComPortIn, St);
+  Writeln;
+  Repeat
+    Readln(S);
+    if S <> 'exit' then
+    begin
+      Write(ComPortOut, S);
+      Read(ComPortIn, St);
+      Writeln(St);
+    end;
+  Until S = 'exit';
+  Write('Hanging up...');
+  Write(ComPortOut, HangUp);
+end.

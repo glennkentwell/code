@@ -1,0 +1,111 @@
+program SalesFileReader;
+uses Crt, Printer;
+const
+  TopTitle = '                            MULTI-DISK COMPUTER COMPANY';
+  Title2 = '                              SALES REPORT';
+  TitleLineOne = 'SALESPERSON   SALESPERSON         PRODUCT     QTY     PRICE   EXTENSION';
+  TitleLineTwo = 'NUMBER        NAME                CODE        SOLD            AMOUNT';
+  TotalFor = '  TOTAL FOR';
+  TotalForReport = '  TOTAL FOR REPORT  ';
+  FileName = 'saledata.dat';
+
+Type
+   EmployeeID   = 1000 .. 9999;
+   ProductCode  = 1000 .. 9999;
+   SalesRecord  = Record
+     SalespersonNo      : EmployeeID;
+     SalespersonName    : String [11];
+     ProductNo          : ProductCode;
+     QuantitySold       : Integer;
+     UnitPrice          : Real;
+   End {SalesRecord};
+
+var
+  Sale: SalesRecord;
+  PageNo, CurrentNo, PrevNo: integer;
+  PrevName: string;
+  SalesTotal, SubTotal: Real;
+  SalesFile: file of SalesRecord;
+  Day, Month, Year: shortint;
+  Extension: Real;
+
+procedure Setup;
+begin
+  ClrScr;
+  SalesTotal:= 0;
+  SubTotal:= 0;
+  Assign(SalesFile, FileName);
+  Reset(SalesFile);
+  Write('Date: ');
+  Readln(Day, Month, Year);
+  ClrScr;
+  Writeln(Lst, TopTitle);
+  Write(Lst, Day,'/', Month,'/', Year);
+  Writeln(Lst, Title2);
+  Writeln(Lst);
+  Writeln(Lst, TitleLineOne);
+  Writeln(Lst, TitleLineTwo);
+  Writeln(Lst);
+end;
+
+procedure ReadFromFile;
+begin
+  Read(SalesFile, Sale);
+end;
+
+procedure PrintDetails;
+begin
+  Write(Lst,Sale.SalesPersonNo, '           ');
+  Write(Lst,Sale.SalesPersonName, '        ' );
+  Write(Lst,Sale.ProductNo,'       ');
+  Write(Lst,Sale.QuantitySold:2,'      ');
+  Write(Lst,Sale.UnitPrice:6:2,' ');
+  Writeln(Lst, Extension:8:2);
+end;
+
+procedure DoTheMaths;
+begin
+  Extension:= Sale.QuantitySold * Sale.UnitPrice;
+  SubTotal:= SubTotal + Extension;
+end;
+
+procedure WriteSubTotal;
+begin
+  Writeln(Lst);
+  Write(Lst,TotalFor);
+  Write(Lst,PrevName,'                                    ');
+  Writeln(Lst, SubTotal:10:2);
+  Writeln(Lst);
+end;
+
+procedure CleanUp;
+begin
+  Close(SalesFile);
+end;
+
+begin
+  Setup;
+  ReadFromFile;
+  PrevNo:= Sale.SalesPersonNo;
+  CurrentNo:= Sale.SalesPersonNo;
+  PrevName:= Sale.SalesPersonName;
+  While not Eof(SalesFile) do
+  begin
+    ReadFromFile;
+    CurrentNo:= Sale.SalesPersonNo;
+    If PrevNo <> CurrentNo then
+    begin
+      WriteSubTotal;
+      SalesTotal:= SalesTotal + SubTotal;
+      SubTotal:= 0;
+      PrevNo:= CurrentNo;
+      PrevName:= Sale.SalesPersonName;
+    end;
+    DoTheMaths;
+    PrintDetails;
+  end; { WHILE }
+  WriteSubTotal;
+  SalesTotal:= SalesTotal + SubTotal;
+  Write(Lst, TotalForReport,'                                      ', SalesTotal:10:2);
+  CleanUp;
+end.

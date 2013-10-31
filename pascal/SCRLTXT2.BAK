@@ -1,0 +1,35 @@
+program Shit;
+uses Crt, Cursor;
+var
+  X, Y: integer;
+  S: string;
+
+begin
+  ClrScr;
+  NoCursor;
+  S:= 'Fuck Yappy He Is Fucked';
+  TextColor(DarkGray);
+  TextBackGround(Black);
+  Write(S);
+  Repeat
+  GoToXY(1, 1);
+  For X:= 1 to Length(S) do
+  begin
+    TextColor(White);
+    Write(S[X]);
+    GoToXY(WhereX - 1, WhereY);
+    TextColor(DarkGray);
+    Write(S[X]);
+  end;
+  For X:= Length(S) downto 1 do
+  begin
+    GoToXY(X, WhereY);
+    TextColor(White);
+    Write(S[X]);
+    Delay(1);
+    GoToXY(WhereX - 1, WhereY);
+    TextColor(DarkGray);
+    Write(S[X]);
+  end;
+  Until KeyPressed;
+end.

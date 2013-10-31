@@ -1,0 +1,24 @@
+program Dir;
+var
+  X: integer;
+
+begin
+  Repeat
+    For X:= 1 to 8 do
+      Write(Chr(Random(26) + 65));
+    Write('.');
+    For X:= 1 to 3 do
+      Write(Chr(Random(26) + 65));
+    Write(Random(15000):15);
+    Write(' ');
+    Write(Random(12):2);
+    Write('-');
+    Write(Random(31):2);
+    Write('-');
+    Write(Random(8) + 90);
+    Write(Random(12):4);
+    Write(':');
+    Write(Random(60):2);
+    Writeln('a');
+  Until X = -1;
+end.

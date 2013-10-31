@@ -1,0 +1,18 @@
+program Ansi;
+uses Crt, Cursor;
+var
+  X: byte;
+
+begin
+  ClrScr;
+  NoCursor;
+  Repeat
+  For X:= 1 to 15 do
+  begin
+    TextColor(X);
+    TextBackGround(Black);
+    GoToXY(25, 12);
+    Write('My ansi art is kind of crap, really.');
+  end;
+  Until X = 1;
+end.

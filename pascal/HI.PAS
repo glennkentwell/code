@@ -1,0 +1,3 @@
+begin
+  Write('Hi');
+end.

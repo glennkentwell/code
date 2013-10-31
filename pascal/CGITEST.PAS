@@ -1,0 +1,11 @@
+program CGITest;
+
+uses Dos;
+
+begin
+    Writeln('Content-Type: text/html');
+    Writeln;
+    Writeln('<html><head><title>sik</title></head>');
+    Writeln('<body>hey look this is cool</body></html>');
+
+End.

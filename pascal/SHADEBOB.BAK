@@ -1,0 +1,38 @@
+program Yeah;
+uses Crt, Graph, GrafBits;
+var
+  Image: Pointer;
+  X, Y: integer;
+  Size: Word;
+begin
+  GraphicsScreen;
+  GradePalette(Re);
+  SetLineStyle(1, 1, ThickWidth);
+  For X:= 1 to 15 do
+  begin
+    SetColor(X);
+    Circle(15, 15, 16 - X);
+  end;
+  Size:= ImageSize(0, 0, 30, 30);
+  GetMem(Image, Size);
+  GetImage(0, 0, 30, 30, Image^);
+    X:= Random(MaxX);
+    Y:= Random(MaxY);
+  While not KeyPressed do
+  begin
+    Inc(X, Random(10) - 5);
+    Inc(Y, Random(5) - 10);
+    Delay(Random(10));
+    if (X > MaxX) or (Y > MaxY) or
+       (X < 0) or (Y < 0) then
+    begin
+      X:= Random(MaxX);
+      Y:= Random(MaxY);
+      ClearDevice;
+    end;
+    PutImage(X, Y, Image^, XORPut);
+  end;
+  ReadKey;
+  CloseGraph;
+end.
+
