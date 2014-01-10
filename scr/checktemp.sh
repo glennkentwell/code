@@ -20,12 +20,23 @@ do
 	if [ $inttemp -gt $hottest ]; then hottest=$inttemp; fi
 done
 
+# have we spoken in the last 5 mins?
+spoken=` find ~/.temphistory/ -maxdepth 1 -type f -mmin -5 -name 'spoken'| wc -l`
+if [ $spoken -eq 0 ];
+then
+	speak=1
+else
+	speak=0
+fi
+
 if [ $inttemp -gt 1000 ]
 then
 	notify-send -u critical "VERY HOT!  Do something!"
+	if [ $speak -eq 1 ]; then espeak "WARNING WARNING one hundred degrees "; touch ~/.temphistory/spoken; fi
 elif [ $inttemp -gt 900 ]
 then
 	notify-send -u low "Hot! Temps over 90C check it out"
+	if [ $speak -eq 1 ]; then espeak "Over 90 degrees"; touch ~/.temphistory/spoken; fi
 elif [ $inttemp -gt 800 ]
 then
 	notify-send -u low "getting warmer - over 80C"
@@ -34,19 +45,14 @@ fi
 
 #save some temps for posterity, to see if we can see if the fing is overheatin when it shuts downnn
 when=`date +%Y%m%d%H%M%S`
-if [ -d /dev/shm ];
-then 
-	f=/dev/shm/$when
-else
-	f=/tmp/$when
-fi
-echo t1 $temp1 >> $f
-echo t2 $temp2 >> $f
-for core in {0..3}
+if [ ! -d ~/.temphistory ]; then mkdir ~/.temphistory; fi 
+f=~/.temphistory/$when
+
+for item in ${temps[*]}
 do
-	echo c$core ${cores[$core]} >> $f
+	echo $item
+	echo $item >> $f
 done
-echo rg $radeon >> $f
 
 exit
 ### end ###
