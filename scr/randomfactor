@@ -1,0 +1,17 @@
+#!/bin/bash
+
+max=$1
+
+if [ -z $max ]; then max=`date +%s`; fi
+
+echo Calculating factors up to $max
+
+x=0
+while [ $x -lt $max ]
+do
+	echo doing $x
+	num=$(( $RANDOM * 10000))
+	# echo $num >> $max.txt
+	factor $num >> $max.txt
+	x=$(($x+1))
+done
