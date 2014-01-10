@@ -9,13 +9,13 @@ class GarbageGallery {
 	public $debug = FALSE;
 
 	public function __construct(
-								$temp_path = '/dev/shm', 
-								$image_globs = array('*png','*jp*g','*gif'),
+								$temp_path = '/tmp/pics', 
+								$image_globs = array('*png','*jp*g','*gif','*PNG','*JP*G','*GIF'),
 								$symlink_name = 'sm',
 								$thumb_size = 200
 								) {
 		$this->thumbpath = '';
-		$this->temppath = is_dir($temp_path) ? $temp_path : FALSE;
+		$this->temppath = (is_dir($temp_path) || mkdir($temp_path)) ? $temp_path : FALSE;
 		$this->image_globs = $image_globs;
 		$this->symlink_name = $symlink_name;
 		$this->thumb_size = $thumb_size;
@@ -38,8 +38,12 @@ class GarbageGallery {
 	}
 
 	private function chdir() {
+		$parf = $_SERVER['DOCUMENT_ROOT'] . dirname(urldecode($_SERVER['REQUEST_URI']));
 		// find the path the user wants to view, this file probly isn't in that dir
-		$this->workpath = realpath($_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['REQUEST_URI']));
+		$this->workpath = realpath($parf);
+
+		$this->log(__METHOD__, $parf . (is_dir($parf) ? "its a dir" : "not a dir") . nl2br("\n"));
+	
 		// change into it, things will be easier
 		chdir($this->workpath);
 
@@ -48,12 +52,13 @@ class GarbageGallery {
 
 	public function getThumbPath() {
 		preg_match_all('/[A-Za-z0-9]+/', $this->workpath, $matches);
+
 		foreach ($matches as $m=>$match) 
 			$this->thumbpath .= implode('_', $matches[0]);
+		$this->log(__METHOD__, 'just made a thumbpath and it is: ' . $this->thumbpath);
 		
 		$this->log(__METHOD__, 'temppath=' . $this->temppath);
 		$temp = explode(DIRECTORY_SEPARATOR, $this->temppath);
-		print_r($temp);
 		$temp[] = $this->thumbpath;
 		$this->thumbpath=implode(DIRECTORY_SEPARATOR, $temp);
 		
@@ -106,7 +111,9 @@ class GarbageGallery {
 		$this->log(__METHOD__, 'globs: ' . implode(', ', $this->image_globs));
 		$images = array();
 		foreach ($this->image_globs as $glob) {
-			$images = array_merge($images, glob($glob));
+			$globarray = glob($glob)===FALSE ? array() : glob($glob);
+			$this->log(__METHOD__, '$globarray is a: [' . gettype($globarray) . ']! [' . $globarray . ']');
+			$images = array_merge($images, $globarray);
 		}
 		$this->log(__METHOD__, 'Found ' . sizeof($images) . ' images');
 
