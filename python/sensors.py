@@ -1,19 +1,34 @@
 #!/usr/bin/python
 
-class talker:
-
-    @staticmethod
-    def say(txt):
-# a rad cross-platform lib for text to speech
-        engine = pyttsx.init()
-        engine.say(txt)
-        engine.runAndWait()
-
-
-# call 'sensors' program to get CPU etc temps
 import pyttsx       # text to speech
 import re           # regex
 import subprocess   # create sub-processes & shell cmds
+
+class talker:
+    @staticmethod
+    def say(txt):
+        engine = pyttsx.init()
+        if type(txt) is str:
+            print(x[0:79])
+            engine.say(txt)
+        else:
+            engine.say("txt is not a string, it is a {0}".format(type(txt)))
+            print(type(txt))
+        engine.runAndWait()
+
+
+class temp:
+    device = ''
+    adapter = ''
+    temp = 0
+    critical = 100
+
+    def isover(self):
+        return self.temp >= self.critical
+
+
+# call 'sensors' program to get CPU etc temps
+
 sensors = subprocess.Popen("sensors", stdout=subprocess.PIPE)
 if not sensors.stdout.closed:
     temps, errors = sensors.communicate()
@@ -37,7 +52,9 @@ for st in strtemps:
 floattemps.sort(reverse=True)
 # maxreading = floattemps[0]
 
-    talker.say(temp)
+
+temp = str(temp)
+talker.say(temp)
 
 # dont do this shit it's garbage
 if 22 == 44:
