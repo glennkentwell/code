@@ -1,9 +1,13 @@
-code
+Bits of code 
 ====
 
 Mostly just experiments and little proof-of-concepts/spike solutions to try out languages etc.  Languages here so far:
-* Pascal! (I was using Turbo Pascal 7.0 at the time...)
-* Javascript
-* PHP
-* shell/bash scripts
-* Python
+* [Javascript](/glennkentwell/code/tree/master/js "")
+* [PHP](/glennkentwell/code/tree/master/php "")
+* [bash shell](/glennkentwell/code/tree/master/scr "")
+* [Python](/glennkentwell/code/tree/master/python "")
+
+This is a paragraph. Nothing wrong with that.
+
+* [Pascal]  
+(/glennkentwell/code/tree/master/pascal "") (I was a bit into Turbo Pascal 7.0 in the 90s haha)
