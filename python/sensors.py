@@ -5,14 +5,15 @@ class talker:
     @staticmethod
     def say(txt):
 # a rad cross-platform lib for text to speech
-        import pyttsx
         engine = pyttsx.init()
         engine.say(txt)
         engine.runAndWait()
 
 
 # call 'sensors' program to get CPU etc temps
-import subprocess
+import pyttsx       # text to speech
+import re           # regex
+import subprocess   # create sub-processes & shell cmds
 sensors = subprocess.Popen("sensors", stdout=subprocess.PIPE)
 if not sensors.stdout.closed:
     temps, errors = sensors.communicate()
@@ -21,14 +22,13 @@ if type(errors) is str:
     print("errors=\n" + errors)
 
 # show ol cap'n user
-print(temps)
-raw_input('Press enter to continue...')
-subprocess.call("clear")
+# print(temps)
+# raw_input('Press enter to continue...')
+# subprocess.call("clear")
 
 # find each of the temperature numbers
 start = prev = count = 0
 
-import re
 strtemps = re.findall("\ \ \ [+-]\d+\.\d+", temps)
 floattemps = []
 for st in strtemps:
@@ -36,10 +36,10 @@ for st in strtemps:
     floattemps.append(ft)
 floattemps.sort(reverse=True)
 # maxreading = floattemps[0]
-for temp in floattemps:
+
     talker.say(temp)
 
-# dont do this shit
+# dont do this shit it's garbage
 if 22 == 44:
 # start = temps.find("+", start)
     while temps.find("+", start) >= 0:
