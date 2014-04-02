@@ -1,0 +1,9 @@
+// excel formula to calculate attainable rate for ADSL1
+// =IF(B5<=29.002,8000,SUM($'Lookup Table'.F21:F27))
+
+// formula for attainable rate for ADSL2
+// =IF(B5<=12.5,24000,SUM($'Lookup Table'.F31:F40))
+
+// the actual bit that does the thing
+// =(B5/B14)*1000
+
