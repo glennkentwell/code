@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo Killing any existing synergy servers...
+echo Killing any existing synergy clients...
 killall synergyc
 
 # sh 
