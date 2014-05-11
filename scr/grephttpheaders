@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# remove the HTTP headers from the top of the file in arg 1
+
+cat $1 |grep -v \^HTTP\/|grep -v "^[a-zA-Z\-]*\:"
