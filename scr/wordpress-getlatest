@@ -1,0 +1,3 @@
+#!/bin/sh
+
+wget http://wordpress.org/latest.tar.gz
