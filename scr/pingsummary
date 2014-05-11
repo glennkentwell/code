@@ -1,0 +1,13 @@
+#!/bin/bash
+
+num=$2
+if [ -z "$num" ]; then num=3; fi
+ip="$1"
+if [ -z "$ip" ]; then ip=103.1.185.193; fi
+
+ping -c $num $ip | tail -n 1|  awk -F \/ -v ipvar="$ip" '{printf "%.2f ± %.2fms to %s \n",$5,$7,ipvar;}'
+
+
+# ping -c $num $ip | tail -n 1|  awk -F \/ ipvar="$ip" '{printf "%.2f rtt to __%s__",$5,ipvar; 5; printf " %.2f",$7; print "\n";}'
+# awk variables
+# echo\ something\ or\ other\ \|\ awk\ -v\ xyz=\ \'\{printf\ exwhyzee=\[%s\]\,\}\'
