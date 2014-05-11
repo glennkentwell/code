@@ -5,6 +5,12 @@ if [ -n "$1" ]; then
 		xrandr --output LVDS --mode 1920x1080 --right-of VGA-0 --output VGA-0 --mode 1920x1080
 	elif [ "$1" == home ]; then 
 		xrandr --output LVDS --mode 1920x1080 --left-of VGA-0 --output VGA-0 --mode 1440x900 # 1280x1024
+    elif [ "$1" == left ]; then
+        echo changing to left
+        xrandr --output LVDS --rotate left # --right-of VGA-0 --output VGA-0 --mode 1440x900
+    elif [ "$1" == right ]; then
+        echo changing to right
+        xrandr --output LVDS --rotate right # --right-of VGA-0 --output VGA-0 --mode 1440x900
 	elif [ "$1" == none ]; then
 		xrandr --output LVDS --mode 1920x1080 --output VGA-0 --off
 	fi
@@ -16,3 +22,4 @@ else
 	echo or
 	echo "gkrandr none"
 fi
+xrandr --output LVDS --rotate right --right-of VGA-0
