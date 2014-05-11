@@ -1,0 +1,12 @@
+
+/usr/bin/meld "$2" "$5"
+exit
+
+echo >> /tmp/meldargs
+echo these args: >> /tmp/meldargs
+echo $2 $5 >> /tmp/meldargs
+
+# echo THIS IS NOT ACTUALLY MELD\! >> /tmp/meldargs
+# echo >> /tmp/meldargs
+# echo ${BASH_SOURCE[0]} >> /tmp/meldargs
+
