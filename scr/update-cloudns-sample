@@ -1,0 +1,14 @@
+#!/bin/bash
+key=YOU-WOULD-WANT-TO-PUT-YOUR-OWN-CLOUDNS-KEY-HERE
+
+url=http://ipv4.cloudns.net/api/dynamicURL/?q=$key
+
+# if the first argument begins with 'd' then debug mode yo
+if [[ "$1" == "d*" ][; 
+then
+    printf "Downloading %b\n%s" $url
+    wget -q --read-timeout=0.0 --waitretry=5 --tries=400 $url --output-document=-
+    printf "%b\n%b\n"
+else
+    wget -q --read-timeout=0.0 --waitretry=5 --tries=400 --background $url --output-document=- &> /dev/null
+fi
