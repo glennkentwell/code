@@ -1,0 +1,30 @@
+#!/bin/sh
+
+dir=~/Pictures/wallpaper
+
+echo numargs:\t $#
+echo args:\t $*
+
+# if an argument was specified it's where to look for pics
+if [ $# -ge 1 ]
+then
+	if [ ! -d $1 ]
+	then 
+		echo $1 is not a directory!
+		exit
+	else
+		dir=$1	
+	fi
+fi
+echo Looking in $dir
+
+
+for f in `ls -1 $dir | shuf`
+do 
+	m=`mimedb $f`						# get the file's MIME type, eg 'image/jpeg'
+	if [ `expr $m : image\/` -ne 0 ]; 	# use expr's string operator http://www.grymoire.com/Unix/Sh.html#uh-88
+	then 
+		echo $m $f; 
+		exit;
+	fi; 
+done
