@@ -1,0 +1,6 @@
+#!/bin/bash
+
+scr="ssh-keygen -b 8192 -t rsa -N omgyoufuckinmuppetlol -f /dev/shm/`date +%N`"
+echo $scr
+
+# sh -c $scr
