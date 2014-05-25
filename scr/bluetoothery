@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# 00:1D:D8:37:D8:59 Microsoft Bluetooth Notebook Mouse 5000
+# E0:CB:1D:4F:27:81 fire
+# 7C:ED:8D:68:D2:73 Microsoft Bluetooth Mobile Keyboard 6000
+
+# Enable the GATT functionality. Default is false
+# EnableGatt = false
+
+# get device IDs into some env vars like
+mouse=$(grep -i mouse ~/notes-bluetooth.txt |awk '{print $1}')
+kindle=$(grep -i fire ~/notes-bluetooth.txt |awk '{print $1}')
+keyboard=$(grep -i keyboard ~/notes-bluetooth.txt |awk '{print $1}')
+
+# ditch the bluetooth modules, add em back in, and restart the daemon
+rmmod btusb
+rmmod bluetooth
+rmmod hidp
+rmmod l2cap
+modprobe -v btusb bluetooth hidp l2cap
+sudo /etc/init.d/bluetooth restart
+
+# then kick the interface into gear
+hciconfig --all
+hciconfig hci0 up
