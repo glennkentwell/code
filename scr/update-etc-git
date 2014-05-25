@@ -1,0 +1,21 @@
+#!/bin/sh
+remote=/media/toshiba/everything/backup/chief-etc/chief-etc.git
+# now=$(date -u +%Y%m%d_%H%M+0000)
+now=$(date -uR) # UTC timezone and RFC 2822 date format
+
+cd /etc
+git add .
+git commit -m "auto commit at $now"
+
+# if toshiba drive is there, push to repos on it
+if [ -e "$remote" ];
+then
+    git push toshibahdd master
+fi
+
+# this was stupid, just do "git add ." and use the .gitignore ay
+#
+# gitadd=$(find /etc -type f -not -path "/etc/.git/*" -not -path "/etc/phpsh/*" -printf "\"%p\"\n")
+#        -printf "git --git-dir=/etc/.git --work-tree=/etc add \"%p\";")
+# echo $gitadd >> /tmp/update-etc-git
+
