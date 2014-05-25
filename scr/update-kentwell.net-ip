@@ -1,0 +1,15 @@
+#!/bin/sh
+
+ENABLED_HOSTNAME=chief
+
+if [ -n "$1" ]; then DEBUG=1; fi
+
+if [ -n "$DEBUG" ]; then echo hostname is $(hostname); fi
+
+if [ $(hostname) = "$ENABLED_HOSTNAME" ]; then
+    msg=$(curl -s https://kentwell.net/ip/?set=1 2>&1)
+else
+    msg="Not doing anything because this system's hostname is not $ENABLED_HOSTNAME"
+fi
+if [ -n "$DEBUG" ]; then echo $0 $msg; fi
+/usr/bin/logger $0 $msg
