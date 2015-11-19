@@ -1,0 +1,34 @@
+#!/bin/bash
+
+tail -f log.txt | awk -f displayawk
+
+exit
+
+
+while true;
+do
+	secs="1 60 3600"	# look back 1 second
+
+	for sec in $secs
+	do
+		cmp="$(tail -n $(($sec+1)) log.txt )"
+		first="$(echo $cmp | head -n 1)"
+		last="$(echo $cmp | tail -n 1)"
+		echo $first
+		echo $last
+
+		starttime=$(echo $first|awk '{print $1}') 	
+		endtime=$(echo $last|awk '{print $1}')
+
+		startsent=$(echo $first|awk '{print $3}')
+		endsent=$(echo $last|awk '{print $3}')
+
+		startreceive=$(echo $first|awk '{print $4}')
+		endreceive=$(echo $last|awk '{print $4}')
+
+		echo Sent $(($endsent - $startsent)) bytes,\
+			Recv $(($endreceive - $startreceive)) bytes \
+			in $(($endtime - $starttime)) seconds
+	done
+
+done

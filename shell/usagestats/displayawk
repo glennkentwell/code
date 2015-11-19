@@ -1,0 +1,27 @@
+#!/bin/awk
+
+ BEGIN {
+ 	sec=$1
+ 	prevs=$3
+ 	prevr=$4
+ }
+
+{
+	time=$1-sec
+	if (time<1) time=0
+	sent=$3-prevs
+	sentsec=sent/time
+	recv=$4-prevr
+	recvsec=recv/time
+
+	if (NR > 1)
+		printf "%15s\t %8.d sent (%6.d/sec) \t%8.d received (%6.d/sec)\n", $2, sent, sentsec, recv, recvsec
+	
+	sec=$1
+	prevs=$3
+	prevr=$4
+}
+
+END {
+	print "bye"
+}

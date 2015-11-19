@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# create the file named .loggingenabled to enable
+# capturing of stats
+# if the file doesn't exist, no capturing 
+FILENAME=".loggingenabled"
+
+isenabled () {
+	stat $FILENAME 2>1 > /dev/null
+	if [ $? -eq 0 ]
+	then
+		enabled=1	
+	else
+		enabled=0
+	fi
+}
+
+enabled=0
+checkenabled=0
+while true
+do
+	if [ $enabled -eq 1 ]
+	then
+		./updatestats >> log.txt
+		sleep 0.1
+
+		# check every 100 loops to make sure still enabled
+		checkenabled=$(($checkenabled+1))
+		if [ $checkenabled -ge 100 ]
+		then
+			isenabled
+			checkenabled=0
+		fi
+
+	else
+		# wait a second then check if we've been enabled
+		sleep 1
+		isenabled
+	fi
+done
+
+
+
+
+# got confused, this is for the wrong thing
+# it's for a list of hostnames
+# e.g. if you were going to tcping a bunch of hosts
+loadhosts () {
+	export hosts="$(grep -v '^#' ./$FILENAME)"
+}

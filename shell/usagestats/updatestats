@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Get broadband usage stats from 2Wire 2701HGV-W router web UI
+# and output them in the format:
+# 	1447949281 20151120-030801 1000 2000
+# where 1000 is the number of bytes received, and 2000 is the number of bytes sent
+
+DEBUG=0
+printdebug () {
+	if [ "$DEBUG" -eq 1 ]
+		then echo $1 $2 $3 
+	fi
+}
+
+if [ "-d" == "$1" ] 
+then
+	DEBUG=1
+fi
+
+URL=http://10.0.0.138/xslt?PAGE=B04
+
+stats=$(curl --silent $URL | grep fieldlabelsmallbold -A 1|sed -e 's/[^0-9]//g')
+printdebug stats: "$stats"
+
+transmitbytes=$(echo "$stats"	| grep '[0-9]'| head -n 1);
+printdebug transmit: $transmitbytes
+
+receivebytes=$(echo "$stats"	| grep '[0-9]'| tail -n 1);
+printdebug receive: $receivebytes
+
+datestring=$(date +%Y%m%d-%H%M%S)
+timestamp=$(date +%s)
+echo $timestamp $datestring $transmitbytes $receivebytes 
