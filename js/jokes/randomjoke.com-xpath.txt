@@ -1,0 +1,32 @@
+http://www.randomjoke.com/topiclist.html
+
+
+<font face="Helvetica,Arial"><a href="topic/haha.php">Assorted</a>
+                  items which don't fall into any particular category<br>
+                  <a href="topic/oneliners.php">One Liners</a> <br>
+                  <a href="topic/news.php">Mostly True Stories</a><br>
+                  <a href="topic/signs.php">Signs of our Times</a><br>
+                  <a href="topic/nerd.php">Jokes for Nerds</a> <br>
+                  <a href="topic/professional.php">Items about 
+                  Professionals.</a>
+                  Your basic lawyer, doctor, etc. jokes <br>
+                  <a href="topic/quotes.php">Quotations</a> <br>
+                  <a href="topic/lightbulb.php">Light Bulb Jokes</a> <br>
+                  <a href="topic/couples.php">The Battle of the Sexes</a> <br>
+                  <a href="topic/riddles.php">Riddles</a> <br>
+                  <a href="topic/religion.php">Religious Jokes</a><br>
+  <a href="topic/gross.php">Gross</a><br>
+                  <a href="topic/blonde.php">Blondes</a> <br>
+                  <a href="topic/politics.php">Politics</a> <br>
+                  <a href="topic/doit.php">Just Do It </a><br>
+                  <a href="topic/laws.php">Murphy's Law</a>
+                  and various lesser known laws<br>
+                  <a href="topic/defs.php">Definitions</a> that you may not
+                  find in Webster's<br>
+                  <a href="topic/dirty.php">Dirty Jokes</a> <br>
+                  <a href="topic/ethnic.php">Ethnic Jokes</a> each of which
+                  is objectionable to someone</font>
+
+
+
+/html/body/table/tbody/tr/td[2]/center[2]/table/tbody/tr[2]/td[2]/center/table/tbody/tr/td/font

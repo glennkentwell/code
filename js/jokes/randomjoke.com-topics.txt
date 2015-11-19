@@ -1,0 +1,38 @@
+topic/haha.php Assorted
+topic/oneliners.php One Liners
+topic/news.php Mostly True Stories
+topic/signs.php Signs of our Times
+topic/nerd.php Jokes for Nerds
+topic/professional.php Items about Professionals
+topic/quotes.php Quotations
+topic/lightbulb.php Light Bulb Jokes
+topic/couples.php The Battle of the Sexes
+topic/riddles.php Riddles
+topic/religion.php Religious Jokes
+topic/gross.php Gross
+topic/blonde.php Blondes
+topic/politics.php Politics
+topic/doit.php Just Do It
+topic/laws.php Murphy's Law
+topic/defs.php Definitions
+topic/dirty.php Dirty Jokes
+topic/ethnic.php Ethnic Jokes
+http://www.randomjoke.com/topic/haha.php	Assorted
+http://www.randomjoke.com/topic/oneliners.php	One
+http://www.randomjoke.com/topic/news.php	Mostly
+http://www.randomjoke.com/topic/signs.php	Signs
+http://www.randomjoke.com/topic/nerd.php	Jokes
+http://www.randomjoke.com/topic/professional.php	Items
+http://www.randomjoke.com/topic/quotes.php	Quotations
+http://www.randomjoke.com/topic/lightbulb.php	Light
+http://www.randomjoke.com/topic/couples.php	The
+http://www.randomjoke.com/topic/riddles.php	Riddles
+http://www.randomjoke.com/topic/religion.php	Religious
+http://www.randomjoke.com/topic/gross.php	Gross
+http://www.randomjoke.com/topic/blonde.php	Blondes
+http://www.randomjoke.com/topic/politics.php	Politics
+http://www.randomjoke.com/topic/doit.php	Just
+http://www.randomjoke.com/topic/laws.php	Murphy's
+http://www.randomjoke.com/topic/defs.php	Definitions
+http://www.randomjoke.com/topic/dirty.php	Dirty
+http://www.randomjoke.com/topic/ethnic.php	Ethnic

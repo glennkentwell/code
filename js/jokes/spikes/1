@@ -1,0 +1,9 @@
+if (navigator && navigator.geolocation) {
+} else {
+    if (console && console.log)
+        console.log('no geolocation api');
+    else if (typeof alert !== 'undefined')
+        alert('no geolocation api');
+    else
+        throw('my hands up');   // FUCK IT THEY'LL FIGURE IT OUT
+}

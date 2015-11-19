@@ -1,0 +1,8 @@
+
+
+This file is totes a UTF-8 character encoded file, if vim is to be believed.
+
+
+á ãä  ç éêëìíîïðñò  õö øùú
+
+
