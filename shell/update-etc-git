@@ -4,7 +4,7 @@ remote=/media/toshiba/everything/backup/chief-etc/chief-etc.git
 now=$(date -uR) # UTC timezone and RFC 2822 date format
 
 cd /etc
-git add . -u        # -u updates git index with files that have been deleted 
+git add .
 git commit -m "auto commit at $now"
 
 # if toshiba drive is there, push to repos on it
@@ -18,8 +18,4 @@ fi
 # gitadd=$(find /etc -type f -not -path "/etc/.git/*" -not -path "/etc/phpsh/*" -printf "\"%p\"\n")
 #        -printf "git --git-dir=/etc/.git --work-tree=/etc add \"%p\";")
 # echo $gitadd >> /tmp/update-etc-git
-
-# cd /etc; git log |grep -oe '\ \ [A-Z]\w\w\ .*' > ~/etcgitdates.txt
-# use PHP to calc the number of minutes between each of the git updates
-# php -r $prev=0; foreach($arrf as $datestr) { $t=strtotime($datestr); echo (($prev-$t)/60) . ' mins ' . $t. "\n"; $prev = $t; }
 

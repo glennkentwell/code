@@ -1,0 +1,16 @@
+*.o
+*.pyc
+*.swp
+*~
+moc_*
+Makefile
+ext/
+dissent
+test
+docs/html
+test.log
+libdissent.so*
+keygen
+*.moc
+entry_tunnel
+exit_tunnel
