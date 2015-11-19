@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# just check for a normal file
+if [ -f "/home/glenn/.bashrc" ]
+then
+    echo bashrc is there
+fi
+
+# now check for a file specified by the first command line arg
+if [ -e "$1" ]
+then
+    echo "-e is true for $1 at $(pwd)"
+fi
+
+#if [ -f $1 ]
+#    echo '-f is true'
+#
+#if [ -d $1 ]
+#    echo '-d is true'
+#
