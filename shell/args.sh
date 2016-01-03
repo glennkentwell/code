@@ -1,23 +1,19 @@
-#!/bin/sh
+#!/bin/bash
 
-# all command-line arguments that are passed
-echo '$* = all arguments'
-echo $*
+echo all args: "$*"
 
-echo ' '
-echo '**************'
-echo ' '
+echo num args: "$#"
+echo '$0 ' "$0"
+echo '$1 ' "$1"
+echo '$2 ' "$2"
+echo '$3 ' "$3"
 
-# current program?
-echo '$0 = the program itself is the 0th argument'
-echo $0
+argfun () { 
+	echo '$0 ' "$0"
+	echo '$1 ' "$1"
+	echo '$2 ' "$2"
+	echo '$3 ' "$3"
+}
 
-echo ' '
-echo '**************'
-echo ' '
-
-# first argument
-echo '$1 and $2 etc are the arguments that are passed '
-echo ' to the program '
-echo $1
-echo $2
+argfun "$0" "$1" "$2" "$3"
+argfun "argone", "argtwo", "argtree", "argfour"
