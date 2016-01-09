@@ -7,5 +7,5 @@ language features, or spike solutions for parts of other things.
 * [PHP](/php "")
 * [bash shell](/scr "")
 * [Python](/python "")
-* [...and some of my high school adventures with Turbo Pascal! Lol...](/pascal "") 
+* ...and some of my high school adventures with [Turbo Pascal](/pascal "")! Lol...
 
