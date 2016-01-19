@@ -17,3 +17,11 @@ argfun () {
 
 argfun "$0" "$1" "$2" "$3"
 argfun "argone", "argtwo", "argtree", "argfour"
+
+# test if a variable is set
+# returns true (1) if not set
+if [ -v  ]; then echo not set; fi
+
+
+echo '$BASH_CMDS: ' $BASH_CMDS
+echo '$BASH_SOURCE: ' $BASH_SOURCE
