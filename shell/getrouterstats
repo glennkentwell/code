@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# example usage:
+# while true; do getrouterstats | grep Recei >> getrouterstats.txt; sleep 60; done
+# cat getrouterstats.txt |awk '{print $2" "($2-Px)/1024/1024" MB"; Px=$2 }'
+
 # gets WAN traffic stats from Telstra gateway Technicolor TG797n v3 
 # works July 2016 for Version Turquoise (15.3)
 
