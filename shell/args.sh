@@ -25,3 +25,10 @@ if [ -v  ]; then echo not set; fi
 
 echo '$BASH_CMDS: ' $BASH_CMDS
 echo '$BASH_SOURCE: ' $BASH_SOURCE
+
+function argcount () { 
+    set | head -n $LINES #get the vars
+    read        # wait for the human
+    clear       # clear the screen
+    echo $#     # number of arguments
+}
