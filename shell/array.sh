@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# https://www.cyberciti.biz/faq/bash-for-loop-array/
+
 something=( "oh" my 3943943 gosh );
 echo 'Array:'
 echo $something     # only prints the first value
