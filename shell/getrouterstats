@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# example usage:
+# while true; do getrouterstats | grep Recei >> getrouterstats.txt; sleep 60; done
+# cat getrouterstats.txt |awk '{print $2" "($2-Px)/1024/1024" MB"; Px=$2 }'
+
+# gets WAN traffic stats from Telstra gateway Technicolor TG797n v3 
+# works July 2016 for Version Turquoise (15.3)
+
+function clearmsg () {
+	# http://www.tldp.org/HOWTO/Bash-Prompt-HOWTO/x361.html
+	# erase message
+	echo -en "\033[90D\033[K"	
+}
+
+# get gateway uptime stats from 'advanced' page
+printf 'Getting uptime...'
+uptime=$( 
+	curl -s http://10.0.0.138/gateway.lp \
+	| grep -i uptime \
+	| sed -e 's/^.*Uptime\:  //' -e 's/sec.*$/sec/'
+)
+clearmsg
+
+# get port stats from diagnostics page/screen on router
+printf 'Getting port stats...'
+stats=$( 
+	curl -s http://10.0.0.138/modals/diagnostics-network-modal.lp  |
+	grep -i wlan  |
+	tr '<' '\n'  |
+	grep '[0-9]'  |
+	grep -v 'td>0'  |
+	grep 'Port 5' -A 2  |
+	tail -n 2  |
+	sed -e 's/td>//g'  |
+	tr '\n' ' '  
+)
+clearmsg
+
+# get receive and send values
+rcv=$( echo $stats | awk '{print $1}' )
+tx=$( echo $stats | awk '{print $2}' )
+
+# calc in megabytes
+rcvMB=$(( $rcv/1024/1024 ))
+txMB=$(( $tx/1024/1024 ))
+
+echo Up for $uptime
+echo Received $rcv \($rcvMB MB\), sent $tx \($txMB MB\)
+
+echo
