@@ -1,12 +1,8 @@
 #!/bin/bash
 
-# screen="eDP1"
-# width=1366
-# height=768
-scaleamt="$1"
-
 DEBUG=1
 logfn="/tmp/xrandr.log"
+scaleamt="$1"
 
 function debug() {
 	if [ 0 -lt $DEBUG ]; then
@@ -14,17 +10,43 @@ function debug() {
 	fi
 }
 debug "#### $( date +%Y-%m-%dT%H:%M:%S%z ) ######################################################################"
-debug $( printf "0: %s\n1: %s\n2: %s\n3: %s\n" $0 $1 $2 $3 )
+
+function printargs() {
+	debug $( printf "CLI Arguments: 0: %s\n1: %s\n2: %s\n3: %s\n" $0 $1 $2 $3 )
+}
 function scaleby() {
-	defaultamt=1
+	defaultamt=1.2
 	if [ "" == "$scaleamt" ]
 	then 
 		debug "scale factor was empty so $defaultamt"
-		printf "%2.0f\n" $defaultamt | sed -e 's/\ //g'
-		exit
+		printf "%2.2f\n" $defaultamt | sed -e 's/\ //g'
+	else
+		debug "scale factor was NOT empty so it is $scaleamt"
+		printf "%2.2f\n" $scaleamt | sed -e 's/\ //g'
 	fi
-	debug "scale factor was NOT empty so it is $scaleamt"
-	printf "%2.0f\n" "$scaleamt" | sed -e 's/\ //g'
+}
+# test scale multiplier func
+function scaletest() {
+	if [ "" != "$SCALETEST" ]
+	then
+		debug "just testing scale func"
+			scaleamt="1.2"
+		scale=$( scaleby )
+#		debug $( printf "scale is: %2.2f, scaleby becomes %2.2f", "0$1", $scale )
+		echo
+		scaleamt="0.2"
+		scale=$( scaleby )
+#		debug $( printf "scale is: %2.2f, scaleby becomes %2.2f", "0$1", $scale )
+		echo
+		scaleamt="-2.1"
+		scale=$( scaleby )
+#		debug $( printf "scale is: %2.2f, scaleby becomes %2.2f", "0$1", $scale )
+		echo
+	
+		exit
+	else
+		debug "Not testing scalefunc: $SCALETEST"
+	fi
 }
 function xrandrline1() {
 	xrandr --prop | head -n 1
@@ -60,13 +82,16 @@ function multiply() {
 	fi
 	echo "$product"
 }
+# export -f scaleby
 # export -f multiply
 
+scaletest "$0"
+
 screen=$( screenname )
-scaleamt=$( scaleby )
+scaleamt=$( scaleby ) 
 width=$( nativeresx )
 height=$( nativeresy )
-debug scale is "$scaleamt"
+debug scale is "$scaleamt and not $1"
 debug current resolution is $( currentresx ) by $( currentresy )
 debug native resolution is $( nativeresx ) by $( nativeresy )
 debug width is "$width*$scaleamt"
@@ -74,12 +99,10 @@ debug height is "$height*$scaleamt"
 
 resolution=$width"x"$height
 
-newwidth=$( multiply $width $scaleamt )
-debug "raw newwidth is $newwidth"
+newwidth=$( printf "%2.0f\n" $( multiply $width $scaleamt ) )
 debug $( printf "formatted newwidth is %2.0f\n" $newwidth )
 
-newheight=$( multiply $height $scaleamt )
-debug "raw new height is $newheight"
+newheight=$( printf "%2.0f\n" $( multiply $height $scaleamt ) )
 debug $( printf "new height is: %2.0f\n" "$newheight" )
 
 newresolution=$newwidth"x"$newheight
@@ -88,8 +111,8 @@ cmd="xrandr --output $screen --mode $resolution --scale $scaleamt"x"$scaleamt --
 debug new height is $newheight
 debug new width is $newwidth
 debug new resolution is $newresolution
-echo "here"
 debug $( printf "cmd is %s" "$cmd" )
-echo "here2"
+
 # run the xrandr command
 bash -c "$cmd"
+
