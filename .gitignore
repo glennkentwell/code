@@ -1,1 +1,23 @@
 scr/update-cloudns
+
+# Private Keys & Certificates
+*.pem
+*.key
+**/certbot/**
+
+# Credentials & Secrets
+.env
+.envrc
+*password*.txt
+*key*.txt
+clientkey.json
+teams.json
+team-*.json
+config.json
+litellm.yaml
+
+# Logs with sensitive data
+new/php/slack-emoji-reactor/**/log/*.txt
+
+# Infrastructure data
+new/docker/ntrc/metabase/data/
