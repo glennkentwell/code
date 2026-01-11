@@ -1,6 +1,10 @@
 #!/bin/bash
-key=NDg3MTc1OjMyNzc3NDU6Yjk2NDJhOGFjNzg3ZmFlOWRjOTQxNWVkMDA0NWYzYjA4MDVhMWI0MDI3YzNjZGE2Mjg2YWRiM2JmNDkzMWZjNQ
-# YOU-WOULD-WANT-TO-PUT-YOUR-OWN-CLOUDNS-API-KEY-HERE
+# Read API key from ~/.cloudns config file
+key=$(grep "^key=" ~/.cloudns 2>/dev/null | cut -d= -f2)
+if [ -z "$key" ]; then
+    echo "Error: No API key found. Add 'key=YOUR_KEY' to ~/.cloudns"
+    exit 1
+fi
 
 url=http://ipv4.cloudns.net/api/dynamicURL/?q=$key
 
